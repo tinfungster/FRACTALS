@@ -45,7 +45,7 @@ A package contains a coherent set of functionality that you can often use a blac
 # Add several packages to our environment
 begin
 	using Compose
-  using PlutoUI
+	using PlutoUI
 end
 
 # ╔═╡ 98768e90-187c-11eb-19e5-17c8b90fe324

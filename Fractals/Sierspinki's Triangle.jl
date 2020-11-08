@@ -13,6 +13,14 @@ macro bind(def, element)
     end
 end
 
+# ╔═╡ c8e11800-1874-11eb-2e58-53acb96689fb
+# Add several packages to our environment
+
+begin
+	using Compose
+	using PlutoUI
+end
+
 # ╔═╡ a18e4c30-1880-11eb-0d80-e34d6fb8f5fe
 md"# Math for FUN!!!"
 
@@ -26,93 +34,34 @@ md"# What is a Fractal? 🤔
 # ╔═╡ a95adf70-1874-11eb-20f6-11f9b697522b
 md"# _The Sierpinksi's triangle_"
 
-# ╔═╡ fd73f4c0-1874-11eb-0a39-0d29d0dae707
-number = 6
-
-# ╔═╡ 468628d2-1880-11eb-27d7-71598afaf445
-md"# See you in the next video. Bye!!! 👋
-# Bye!!! 👋"
-
-# ╔═╡ d17cbb40-188d-11eb-2bb0-efb6bb4b9300
-
-
-# ╔═╡ b3f0d570-1874-11eb-002c-fd0abf2c1d9d
-md"To draw Sierpinski's triangle, we are going to use an external package, [_Compose.jl_](https://giovineitalia.github.io/Compose.jl/latest/tutorial). Let's set up a package environment and add the package.
-A package contains a coherent set of functionality that you can often use a black box according to its specification. There are [lots of Julia packages](https://juliahub.com/ui/Home).
-"
-
-# ╔═╡ c8e11800-1874-11eb-2e58-53acb96689fb
-# Add several packages to our environment
-begin
-	using Compose
-	using PlutoUI
-end
+# ╔═╡ 2884fbe0-187b-11eb-0be4-4d03f526a50c
+md"Complexity = $(@bind number Slider(0:7, show_value=true))"
 
 # ╔═╡ 98768e90-187c-11eb-19e5-17c8b90fe324
 md"## Sierpinski's triangle is defined _recursively_:
-- Sierpinski's triangle of complexity N is a figure in the form of a triangle which is made of 3 triangular figures which are themselves Sierpinski's triangles of complexity N-1.
-- A Sierpinski's triangle of complexity 0 is a simple solid equilateral triangle"
+- Sierpinski's triangle of complexity N is a figure in the form of a triangle which is made of 3 triangular figures which are themselves Sierpinski's triangles of complexity N-1. In other words, the Sierspinki Triangle is made up of three copies of itself which are around an upside down equilateral triangle with the same size.
+ 
 
-# ╔═╡ d9026d60-1874-11eb-3354-dd67f07554a9
-md"Just like the definition above, our `sierpinksi` function is _recursive_: it calls itself."
+- A Sierpinski's triangle of complexity 0 is a simple solid equilateral triangle."
 
-# ╔═╡ 7a18f120-1874-11eb-2686-a520e4ce9a7e
-if number == 3 
-	md"""
-Try changing the value of **`complexity` to `5`** in the cell above. 
-Hit `Shift + Enter` to affect the change.
-	"""
-else
-	md"""
-**Great!** As you can see, all the cells in this notebook are linked together by the variables they define and use. Just like a spreadsheet!
-	"""
-end
+# ╔═╡ 7838c9a0-21ef-11eb-1672-b3aca3f79b32
+md"# How can I draw it?"
 
+# ╔═╡ fe972230-21ef-11eb-2c2f-35e42e64de5f
+step = 1
 
-# ╔═╡ 4de91610-187a-11eb-33cc-9f80081b04a1
-md"### Exercise 2.1
-As you can see, the total area covered by triangles is lower when the complexity is higher."
+# ╔═╡ 468628d2-1880-11eb-27d7-71598afaf445
+md"# See you in the next video."
 
-# ╔═╡ 5f9921c0-187a-11eb-2c08-f7d5f53a7a52
-md"""
-Can you write a function that computes the _area of `sierpinski(n)`_, as a fraction of the area of `sierpinski(0)`?
-So:
-```
-area_sierpinski(0) = 1.0
-area_sierpinski(1) = 0.??
-...
-```
-"""
+# ╔═╡ 52c3bf82-21f0-11eb-1895-fd0e7807793a
+md"# Bye!!! 👋"
 
-# ╔═╡ 682760e2-187a-11eb-3872-3723fc7df624
-function area_sierpinski(n)
-	return 3 / 4
-end
+# ╔═╡ 595093e0-21f1-11eb-2581-0db61d8c2262
+md"# How did I program the Sierspinki Triangle with Julia?"
 
-# ╔═╡ 7b2f8280-187a-11eb-106d-8d297088aa3e
-if area_sierpinski(0) == 1.0 && area_sierpinski(1) == 3 / 4
-	md"""
-!!! correct
-    Well done!
-	"""
-else
-	md"""
-!!! warning "Incorrect"
-    Keep working on it!
-	"""
-end
-
-# ╔═╡ 9608d4d0-187a-11eb-1061-91ff6f37b103
-md"**Let's try it out below:**"
-
-# ╔═╡ 2884fbe0-187b-11eb-0be4-4d03f526a50c
-md"Complexity = $(@bind n Slider(0:6, show_value=true))"
-
-# ╔═╡ 450372b0-187b-11eb-1bb5-5b636b710f28
-md"""
-!!! hint
-    Can you write `area_sierpinksi(n)` as a function of `area_sierpinski(n-1)`?
-"""
+# ╔═╡ b3f0d570-1874-11eb-002c-fd0abf2c1d9d
+md"To draw Sierpinski's triangle, we are going to use two external packages, [_Compose.jl_](https://giovineitalia.github.io/Compose.jl/latest/tutorial) and [_PlutoUI.jl_](https://github.com/fonsp/PlutoUI.jl). Let's import the packages into our notebook. (You can download them in the terminal or Atom REPL.)
+A package contains a coherent set of functionality that you cannot do with Julia."
 
 # ╔═╡ 673a7362-187b-11eb-00ec-4983d864eb34
 triangle() = compose(context(), polygon([(1, 1), (0, 1), (1 / 2, 0)]))
@@ -148,36 +97,26 @@ sierpinski(number)
 # ╔═╡ b9bc0ab0-1879-11eb-3b22-c558830517c3
 sierpinski.(0:6)
 
-# ╔═╡ dc601320-187b-11eb-2a81-cfc60d52bc39
-md"""
-Sierpinski's triangle of complexity $(n)
- $(sierpinski(n))
-has area **$(area_sierpinski(n))**
-"""
+# ╔═╡ 15a8be20-21f0-11eb-2938-0f4033a36423
+sierpinski(step - 1)
 
 # ╔═╡ Cell order:
 # ╟─a18e4c30-1880-11eb-0d80-e34d6fb8f5fe
 # ╟─a9d1b190-187e-11eb-02c5-2909b144bc33
 # ╟─73d06d30-187d-11eb-1b07-c16f07d51e2f
 # ╟─a95adf70-1874-11eb-20f6-11f9b697522b
-# ╠═fd73f4c0-1874-11eb-0a39-0d29d0dae707
+# ╟─2884fbe0-187b-11eb-0be4-4d03f526a50c
 # ╟─d0bf15c0-187b-11eb-3a7a-c50bb793cdd8
 # ╠═b9bc0ab0-1879-11eb-3b22-c558830517c3
-# ╠═468628d2-1880-11eb-27d7-71598afaf445
-# ╠═d17cbb40-188d-11eb-2bb0-efb6bb4b9300
+# ╟─98768e90-187c-11eb-19e5-17c8b90fe324
+# ╟─7838c9a0-21ef-11eb-1672-b3aca3f79b32
+# ╠═fe972230-21ef-11eb-2c2f-35e42e64de5f
+# ╟─15a8be20-21f0-11eb-2938-0f4033a36423
+# ╟─468628d2-1880-11eb-27d7-71598afaf445
+# ╟─52c3bf82-21f0-11eb-1895-fd0e7807793a
+# ╟─595093e0-21f1-11eb-2581-0db61d8c2262
 # ╟─b3f0d570-1874-11eb-002c-fd0abf2c1d9d
 # ╠═c8e11800-1874-11eb-2e58-53acb96689fb
-# ╟─98768e90-187c-11eb-19e5-17c8b90fe324
-# ╟─d9026d60-1874-11eb-3354-dd67f07554a9
-# ╠═7a18f120-1874-11eb-2686-a520e4ce9a7e
-# ╠═4de91610-187a-11eb-33cc-9f80081b04a1
-# ╠═5f9921c0-187a-11eb-2c08-f7d5f53a7a52
-# ╠═682760e2-187a-11eb-3872-3723fc7df624
-# ╠═7b2f8280-187a-11eb-106d-8d297088aa3e
-# ╠═9608d4d0-187a-11eb-1061-91ff6f37b103
-# ╠═2884fbe0-187b-11eb-0be4-4d03f526a50c
-# ╟─450372b0-187b-11eb-1bb5-5b636b710f28
 # ╠═673a7362-187b-11eb-00ec-4983d864eb34
 # ╠═aa6b60e0-187b-11eb-1d9f-3dfbe0bdf48c
 # ╠═c4eaac50-187b-11eb-3c92-29f462b7e2d4
-# ╠═dc601320-187b-11eb-2a81-cfc60d52bc39

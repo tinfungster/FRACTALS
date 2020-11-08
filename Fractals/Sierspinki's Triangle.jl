@@ -27,7 +27,7 @@ md"# What is a Fractal? 🤔
 md"# _The Sierpinksi's triangle_"
 
 # ╔═╡ fd73f4c0-1874-11eb-0a39-0d29d0dae707
-number = 10
+number = 6
 
 # ╔═╡ 468628d2-1880-11eb-27d7-71598afaf445
 md"# See you in the next video. Bye!!! 👋
@@ -146,7 +146,7 @@ end
 sierpinski(number)
 
 # ╔═╡ b9bc0ab0-1879-11eb-3b22-c558830517c3
-sierpinski.(0:5)
+sierpinski.(0:6)
 
 # ╔═╡ dc601320-187b-11eb-2a81-cfc60d52bc39
 md"""
